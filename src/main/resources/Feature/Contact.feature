@@ -1,8 +1,10 @@
-@contact-us
+@contact-us @both
 Feature: WebDriverUniversity - Contact Us Page
 
-  Scenario: WebDriverUniversity - Verify Successful Submission Page
+  Background:
     Given I navigate to WebDriverUniversity - Contact Us Page
+
+  Scenario: WebDriverUniversity - Verify Successful Submission Page
     When I verify and enter FirstName
     And I verify and enter LastName
     And I verify and enter emailAddress
@@ -11,9 +13,8 @@ Feature: WebDriverUniversity - Contact Us Page
     Then I verify successful submission page
 
   Scenario: WebDriverUniversity - Verify Successful Page
-    Given I navigate to WebDriverUniversity - Contact Us Page
-    When I verify and enter unique FirstName "FirstName"
-    And I verify and enter unique LastName "LastName"
+    When I verify and enter unique FirstName FirstName
+    And I verify and enter unique LastName LastName
     And I verify and enter unique EmailAddress "emailAddress@gmail.com"
     And I enter comments
     And I click on submit button
