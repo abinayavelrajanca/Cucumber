@@ -1,57 +1,50 @@
 package StepDefinition;
 
+import PageObject.Base_PO;
+import PageObject.Login_PO;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import static driver.DriverFactory.getDriver;
 
-public class Login {
-    private WebDriver driver = getDriver();
+public class Login extends Base_PO {
+    private Login_PO loginPO;
+    public Login(Login_PO loginPO){
+        this.loginPO = loginPO;
+    }
 
     @Given("I access Login Page of WebDriverUniversity")
     public void loginPage() {
-        driver.navigate().to("https://www.webdriveruniversity.com/Login-Portal/index.html");
+        loginPO.navigateToLoginPage();
     }
 
     @When("I enter username {word}")
     public void userName(String userName) {
-        driver.findElement(By.cssSelector("input[id='text']")).sendKeys(userName);
+        loginPO.enterUserName(userName);
     }
 
     @And("I enter password {word}")
     public void passWord(String passWord) {
-        driver.findElement(By.cssSelector("input[id='password']")).sendKeys(passWord);
+        loginPO.enterPassWord(passWord);
     }
 
     @And("I click on Login Button")
     public void i_click_on_login_button() {
-        driver.findElement(By.cssSelector("button[id='login-button']")).click();
+        loginPO.i_click_on_login_button();
     }
 
     @Then("I verify the error message")
     public void i_verify_the_error_message() {
-        String alertErrorMessage = driver.switchTo().alert().getText();
-        if (alertErrorMessage.equals("validation failed")) {
-            System.out.println("Error Message is successfully displayed");
-        }
-        driver.switchTo().alert().accept();
+        loginPO.i_verify_the_error_message();
     }
 
     @Then("I verify the successful loggedIn message")
     public void i_verify_the_successful_message() {
-        String alertSuccessMessage = driver.switchTo().alert().getText();
-        Assert.assertEquals(alertSuccessMessage, "validation succeeded");
-        driver.switchTo().alert().accept();
+        loginPO.i_verify_the_successful_message();
     }
 
     @Then("I verify the message {string}")
     public void i_verify_the_message(String message) {
-        String alertMessage = driver.switchTo().alert().getText();
-        Assert.assertEquals(alertMessage, message);
-        driver.switchTo().alert().accept();
+        loginPO.i_verify_the_message(message);
     }
 }

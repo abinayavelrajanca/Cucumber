@@ -1,4 +1,4 @@
-@contact-us @both
+@contactus @both
 Feature: WebDriverUniversity - Contact Us Page
 
   Background:
